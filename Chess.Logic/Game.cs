@@ -70,9 +70,9 @@ namespace Chess.Logic
         void ChangeSide()
         {
             if (Player.Side == Sides.White)
-                Player.AssignSide(Sides.Black);
+                Player.Side = Sides.Black;
             else
-                Player.AssignSide(Sides.White);
+                Player.Side = Sides.White;
         }
         bool CheckEndGame()
         {
