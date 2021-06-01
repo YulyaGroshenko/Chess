@@ -31,42 +31,44 @@ namespace Chess.WPF
         public bool SelectFigure { get; private set; } = true;
         public bool SelectCell { get; private set; }
         public Game Game { get; set; }
-        public void CreateField()
+        private void CreateField()
         {
-            for (int i = 0; i < 8; i++) // y
+            for (int i = 0; i < 64; i++) // y
             {
-                for (int k = 0; (int)k < 8; k++) // x
+                Button button = new Button()
                 {
-                    Button button = new Button()
-                    {
-                        BorderThickness = new Thickness(1),
-                        BorderBrush = Brushes.Black
-                    };
-                    button.Click += Button_Click;
-                    if (Field[i, (int)k] != null)
-                    {
-                        Field[i, (int)k].Digit = i;
-                        Field[i, (int)k].Letter = (Letters)k;
-                        button.Content = Field[i, (int)k].Abbreviation;
-                    }
-                    else
-                    {
-                        button.Content = " ";
-                    }
-                    Canvas.Children.Add(button);
-                }
+                    BorderThickness = new Thickness(1),
+                    BorderBrush = Brushes.Black
+                };
+                button.Click += Button_Click;
+                Canvas.Children.Add(button);
             }
         }
-        public void PrintField()
+        private void PrintField()
         {
             for (int i = 0; i < Canvas.Children.Count; i++)
             {
                 Button button = Canvas.Children[i] as Button;
                 button.Width = Canvas.Width / 8 - 1;
                 button.Height = Canvas.Height / 8 - 4;
-                Canvas.SetLeft(button, button.Width * (i%8));
-                Canvas.SetTop(button, button.Height * (i/8));
+                if (Field[i / 8, i % 8] != null)
+                {
+                    button.Content = Field[i / 8, i % 8].Abbreviation;
+                    button.Foreground = ChooseColor(Field[i / 8, i % 8]);
+                }
+                else
+                {
+                    button.Content = " ";
+                }
+                Canvas.SetLeft(button, button.Width * (i % 8));
+                Canvas.SetTop(button, button.Height * (i / 8));
             }
+        }
+        private SolidColorBrush ChooseColor(Figure figure)
+        {
+            if (figure.Side == Sides.Black)
+                return Brushes.Black;
+            return Brushes.White;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -75,9 +77,16 @@ namespace Chess.WPF
             {
                 Digit = index / 8;
                 Letter = (Letters)(index % 8);
-                Field[Digit, (int)Letter].Digit = Digit;
-                Field[Digit, (int)Letter].Letter = Letter;
-                Figure = Field[Digit, (int)Letter];
+                try
+                {
+                    Field[Digit, (int)Letter].Digit = Digit;
+                    Field[Digit, (int)Letter].Letter = Letter;
+                    Figure = Field[Digit, (int)Letter];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Выберите клетку, на которой стоит фигура");
+                }
                 SelectFigure = false;
                 SelectCell = true;
             }
@@ -85,7 +94,14 @@ namespace Chess.WPF
             {
                 Digit = index / 8;
                 Letter = (Letters)(index % 8);
-                Game.Play(Figure, Digit, Letter);
+                try
+                {
+                    Game.Play(Figure, Digit, Letter);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 SelectCell = false;
                 SelectFigure = true;
             }
