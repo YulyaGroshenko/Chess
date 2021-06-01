@@ -1,4 +1,4 @@
-﻿using System;
+﻿        using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,8 +15,8 @@ namespace Chess.Logic
     public abstract class Figure
     {
         public abstract char Abbreviation { get; }
-        public int Digit { get; protected set; } 
-        public Letters Letter { get; protected set; }
+        public int Digit { get; set; } 
+        public Letters Letter { get; set; }
         public Sides Side { get; protected set; }
         public void MoveFigure(int digit, Letters letter)
         {
@@ -40,12 +40,12 @@ namespace Chess.Logic
             Side = side;
         }
         protected override bool CheckRightMove(int digit, Letters letter)
-        {
+            {
             if (Letter == letter)
             {
-                if (Digit == 2 && Side == Sides.Black && (digit == 3 || digit == 4))   //первый ход белых
+                if (Digit == 1 && Side == Sides.Black && (digit == 3 || digit == 2))   //первый ход белых
                     return true;
-                else if (Digit == 7 && Side == Sides.White && (digit == 6 || digit == 5))  //первый ход черных
+                else if (Digit == 6 && Side == Sides.White && (digit == 4 || digit == 5))  //первый ход черных
                     return true;
                 else if (digit == Digit++) // все остальные ходы
                     return true;            
@@ -80,7 +80,6 @@ namespace Chess.Logic
                 return true;
             return false;
         }
-
     }
     class Knight : Figure      //конь 
     {

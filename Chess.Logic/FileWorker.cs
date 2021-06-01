@@ -18,10 +18,10 @@ namespace Chess.Logic
                 return new DirectoryInfo("Saves");
             }
         }
-        private static string[] RecordsList { get; set; } =  {"1) name1 - 3",      
-                                                              "2) name2 - 2",    
+        private static string[] RecordsList { get; set; } =  {"1) name1 - 0",      
+                                                              "2) name2 - 0",    
                                                               "3) name3 - 0",     
-                                                              "4) name4 - 4",
+                                                              "4) name4 - 0",
                                                               "5) name5 - 0"};
         public static FileInfo Records
         {

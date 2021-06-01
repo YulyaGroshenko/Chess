@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Chess.Logic
 { 
-    class Game
+    public class Game
     {
         public Board Board { get; private set; } = new Board();
         public Player Player { get; private set ; }    
@@ -23,10 +23,10 @@ namespace Chess.Logic
         }
         public void Play(Figure figure, int finishD, Letters finishL)
         {
-            while (!CheckEndGame())
+            if (CheckEndGame())
             {
                 if (IsDirectionRight(figure, finishD) && figure.Side == Player.Side && CanMove(figure, finishD, finishL))
-                {                    
+                {
                     Board.Field[finishD, (int)finishL] = figure;
                     Board.Field[figure.Digit, (int)figure.Letter] = null;
                     figure.MoveFigure(finishD, finishL);
@@ -37,11 +37,13 @@ namespace Chess.Logic
                     throw new Exception("ты не можешь так сходить, подумай лучше ну или загугли как ходят фигуры в шахматах");
                 }
             }
-            Player.AddVictorys();
-            FileWorker.SavePlayer(Player);
-            
+            else
+            {
+                Player.AddVictorys();
+                FileWorker.SavePlayer(Player);
+            }            
         }
-        bool CanMove(Figure figure, int finishD, Letters finishL)
+        private bool CanMove(Figure figure, int finishD, Letters finishL)
         {
             if (IsCellEmpty(figure, finishD, finishL) || 
                 Board.Field[finishD, (int)finishL].Side != Board.Field[figure.Digit, (int)figure.Letter].Side)
@@ -49,14 +51,14 @@ namespace Chess.Logic
             else
                 return false;
         }
-        bool IsCellEmpty(Figure figure, int digit, Letters letter)
+        private bool IsCellEmpty(Figure figure, int digit, Letters letter)
         {
             if (Board.Field[digit, (int)letter] == null)
                 return true;
             else
                 return false;
         }
-        bool IsDirectionRight(Figure figure, int finishD)
+        private bool IsDirectionRight(Figure figure, int finishD)
         {
             if (figure is Pawn)
             {
@@ -67,14 +69,14 @@ namespace Chess.Logic
             }
             return true;
         }
-        void ChangeSide()
+        private void ChangeSide()
         {
             if (Player.Side == Sides.White)
                 Player.Side = Sides.Black;
             else
                 Player.Side = Sides.White;
         }
-        bool CheckEndGame()
+        private bool CheckEndGame()
         {
             for (int i = 0; i < 8; i++)
             {
