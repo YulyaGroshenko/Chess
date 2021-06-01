@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Chess.Logic
 {
-    class Player
+    public class Player
     {
         public string Name { get; private set; }
         public int Victorys { get; private set; } = 0;

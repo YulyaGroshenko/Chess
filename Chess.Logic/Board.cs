@@ -2,7 +2,7 @@
 
 namespace Chess.Logic
 {
-    class Board
+    public class Board
     {
         public Figure[,] Field { get; private set; }
 
