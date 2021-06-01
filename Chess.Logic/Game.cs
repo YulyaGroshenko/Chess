@@ -34,7 +34,7 @@ namespace Chess.Logic
                 }
                 else
                 {
-                    throw new Exception("ты не можешь так сходить, подумай лучше ну или загугли как ходят фигуры в шахматах");
+                    throw new Exception("ты не можешь так сходить");
                 }
             }
             else

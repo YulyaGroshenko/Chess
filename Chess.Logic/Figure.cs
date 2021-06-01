@@ -47,8 +47,13 @@ namespace Chess.Logic
                     return true;
                 else if (Digit == 6 && Side == Sides.White && (digit == 4 || digit == 5))  //первый ход черных
                     return true;
-                else if (digit == Digit++) // все остальные ходы
-                    return true;            
+                else if (Digit == 6 && Side == Sides.White && (digit == 4 || digit == 5))  //первый ход белых
+                    return true;
+                else if (Digit == digit + 1 && Side == Sides.White) // остальные ходы белых 
+                    return true;
+                else if (Digit == digit - 1 && Side == Sides.Black) // остальные ходы черных
+>>>>>>> Stashed changes
+                    return true;
             }
             return false;
         }
