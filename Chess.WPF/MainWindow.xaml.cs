@@ -33,11 +33,23 @@ namespace Chess.WPF
         }
         private void Records_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< Updated upstream
             
         }
         private void Options_Click(object sender, RoutedEventArgs e)
         {
             
+=======
+            RecordsWindow recordsWindow = new RecordsWindow();
+            recordsWindow.Show();
+            this.Close();
+        }
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsWindow optionsWindow = new OptionsWindow();
+            optionsWindow.Show();
+            this.Close();
+>>>>>>> Stashed changes
         }
         private void Ok_Click(object sender, RoutedEventArgs e)
         {

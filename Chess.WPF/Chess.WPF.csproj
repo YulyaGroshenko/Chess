@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
+=======
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+>>>>>>> Stashed changes
     <Reference Include="Chess.Logic">
       <HintPath>..\Chess.Logic\bin\Debug\netcoreapp3.1\Chess.Logic.dll</HintPath>
     </Reference>
