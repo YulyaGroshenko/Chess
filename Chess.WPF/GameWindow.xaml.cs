@@ -9,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Chess.Logic;
 
 namespace Chess.WPF
 {
@@ -55,26 +54,17 @@ namespace Chess.WPF
                 {
                     button.Content = Field[i / 8, i % 8].Abbreviation;
                     button.Foreground = ChooseColor(Field[i / 8, i % 8]);
-<<<<<<< Updated upstream
-=======
-                    
->>>>>>> Stashed changes
                 }
                 else
                 {
                     button.Content = " ";
                 }
-<<<<<<< Updated upstream
                 Canvas.SetLeft(button, button.Width * (i % 8));
                 Canvas.SetTop(button, button.Height * (i / 8));
+                PaintField(button, i);
             }
         }
-=======
-                PrintField(button, i);
-
-            }
-        }
-        private void PrintField(Button button, int i)
+        private void PaintField(Button button, int i)
         {
             OptionsWindow optionsWindow = new OptionsWindow();
             if (((i / 8) % 2 == 0 && i % 2 != 0) || ((i / 8) % 2 != 0 && i % 2 == 0))
@@ -84,7 +74,6 @@ namespace Chess.WPF
             Canvas.SetLeft(button, button.Width * (i % 8));
             Canvas.SetTop(button, button.Height * (i / 8));
         }
->>>>>>> Stashed changes
         private SolidColorBrush ChooseColor(Figure figure)
         {
             if (figure.Side == Sides.Black)
@@ -94,17 +83,10 @@ namespace Chess.WPF
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int index = Canvas.Children.IndexOf(sender as Button);
-<<<<<<< Updated upstream
-            if (SelectFigure)
-            {
-                Digit = index / 8;
-                Letter = (Letters)(index % 8);
-=======
             Digit = index / 8;
             Letter = (Letters)(index % 8);
             if (SelectFigure)
             {
->>>>>>> Stashed changes
                 try
                 {
                     Field[Digit, (int)Letter].Digit = Digit;
@@ -120,37 +102,24 @@ namespace Chess.WPF
             }
             else if (SelectCell)
             {
-<<<<<<< Updated upstream
-                Digit = index / 8;
-                Letter = (Letters)(index % 8);
                 try
                 {
+                    //Game.Cheats();
                     Game.Play(Figure, Digit, Letter);
-=======
-                try
-                {
-                    Game.Cheats();
-                   // Game.Play(Figure, Digit, Letter);
->>>>>>> Stashed changes
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-<<<<<<< Updated upstream
-=======
-                if (Game.CheckEndGame())
-                    EndGame(true);
-                //if (!Game.CheckEndGame())
+                //if (Game.CheckEndGame())
                 //    EndGame(true);
->>>>>>> Stashed changes
+                if (!Game.CheckEndGame())
+                    EndGame(true);
                 SelectCell = false;
                 SelectFigure = true;
+                PrintField();
             }
-            PrintField();
         }
-<<<<<<< Updated upstream
-=======
         private void EndGame(bool end)
         {
             Game.SaveGame(end);
@@ -158,22 +127,16 @@ namespace Chess.WPF
             mainWindow.Show();
             this.Close();
         }
->>>>>>> Stashed changes
-
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             Canvas.Width = this.ActualWidth;
             Canvas.Height = this.ActualHeight;
             PrintField();
         }
-<<<<<<< Updated upstream
-=======
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
                 EndGame(false);
         }
->>>>>>> Stashed changes
     }
 }

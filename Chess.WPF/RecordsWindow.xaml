@@ -5,19 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess.WPF"
         mc:Ignorable="d"
-<<<<<<< Updated upstream
         Title="RecordsWindow" Height="450" Width="800">
-    <Grid ShowGridLines="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Viewbox MaxHeight="70">
-            <Label>РЕКОРДЫ</Label>
-        </Viewbox>
-        
-=======
-        Title="RecordsWindow" Height="450" Width="800" SizeChanged="Window_SizeChanged">
     <Grid x:Name="Grid" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="70"></RowDefinition>
@@ -30,9 +18,8 @@
         <Viewbox Grid.Row="1">
             <Label x:Name="RecordsList"></Label>
         </Viewbox>
-        <Viewbox MaxHeight="70" Grid.Row="2">
-            <Button IsCancel="True" Click="Back_Click">Назад в меню</Button>
-        </Viewbox>
->>>>>>> Stashed changes
-    </Grid>
+            <Viewbox MaxHeight="70" Grid.Row="2">
+                <Button IsCancel="True" Click="Back_Click">Назад в меню</Button>
+            </Viewbox>
+        </Grid>
 </Window>

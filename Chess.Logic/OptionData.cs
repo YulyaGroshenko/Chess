@@ -6,7 +6,7 @@ namespace Chess.Logic
 {
     public static class OptionData
     {
-        public static int FirstCellColor { get; set; }
-        public static int SecondCellColor { get; set; }
+        public static int FirstCellColor { get; set; } = 0;
+        public static int SecondCellColor { get; set; } = 1;
     }
 }

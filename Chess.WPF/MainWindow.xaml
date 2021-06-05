@@ -21,11 +21,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="btn_Play" Click="Play_Click">Играть</Button>
                 <TextBox x:Name="Name" Visibility="Collapsed" Width="100"></TextBox>
-<<<<<<< Updated upstream
                 <Button x:Name="btn_Ok" Visibility="Collapsed" Click="Ok_Click">Готово</Button>
-=======
-                <Button x:Name="btn_Ok" IsDefault="True" Visibility="Collapsed" Click="Ok_Click">Готово</Button>
->>>>>>> Stashed changes
             </StackPanel>
         </Viewbox>
         <Viewbox Grid.Row="2" MaxHeight="70">

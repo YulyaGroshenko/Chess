@@ -4,13 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess.WPF"
-<<<<<<< Updated upstream
         mc:Ignorable="d"
-        Title="OptionsWindow" Height="450" Width="800">
-    <Grid>
-        
-=======
-        mc:Ignorable="d" 
         Title="OptionsWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -58,8 +52,7 @@
             </StackPanel>
         </Viewbox>
         <Viewbox Grid.Row="4">
-            <Button IsCancel="True" Click="Back_Click">Назад в меню</Button>
+                <Button IsCancel="True" Click="Back_Click">Назад в меню</Button>
         </Viewbox>
->>>>>>> Stashed changes
     </Grid>
 </Window>

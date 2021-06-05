@@ -34,7 +34,7 @@ namespace Chess.Logic
         {
             Side = side;
         }
-        protected override bool CheckRightMove(int digit, Letters letter)
+        public override bool CheckRightMove(int digit, Letters letter)
             {
             if (Letter == letter)
             {
