@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Chess.Logic
 {
-    static class FileWorker
+    public static class FileWorker
     {
         public static DirectoryInfo Saves
         {
@@ -35,32 +35,31 @@ namespace Chess.Logic
         public static void SetRecords(Player player)
         {
             string[] records = File.ReadAllLines(Records.FullName);
-            if (CheckName(records, player))
+            int index = CheckName(records, player);
+            if (index != -1)
             {
-                for (int i = 0; i < records.Length; i++)
-                {
-                    if (records[i].Split(" ")[1] == player.Name && int.Parse(records[i].Split(" ")[3]) < player.Victorys)
-                    {
-                        records[i].Split(" ")[3] = player.Victorys.ToString();
-                        break;
-                    }
-                }
+                string recordsVictorys = records[index].Split(" ")[3];
+                records[index] = records[index].Replace(recordsVictorys, player.Victorys.ToString());
             }
             else
             {
-                records[4].Split(" ")[1] = player.Name;
-                records[4].Split(" ")[3] = player.Victorys.ToString();
+                string RecordsName = records[4].Split(" ")[1];
+                string RecordsVictorys = records[4].Split(" ")[3];
+                records[4] = records[4].Replace(RecordsName, player.Name);
+                records[4] = records[4].Replace(RecordsVictorys, player.Victorys.ToString());
             }
             SortRecords(records);
+            RecordsList = records;
+            File.WriteAllLines(Records.FullName, RecordsList);
         }
-        private static bool CheckName(string[] records, Player player)
+        private static int CheckName(string[] records, Player player)
         {
             for (int i = 0; i < records.Length; i++)
             {
                 if (records[i].Split(" ")[1] == player.Name)
-                    return true;
+                    return i;
             }
-            return false;
+            return -1;
         }
         private static void SortRecords(string[] records)
         {
@@ -79,13 +78,18 @@ namespace Chess.Logic
         }
         public static void SavePlayer(Player player)
         {
-            string json = JsonConvert.SerializeObject(player);
+            string json = JsonConvert.SerializeObject(player, Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            });
             File.WriteAllText($"{Saves.Name}\\{player.Name}", json);
         }
         public static Player GetPlayer(string name)
         {
-            return JsonConvert.DeserializeObject<Player>(File.ReadAllText($"{Saves.Name}\\name"));
+            return JsonConvert.DeserializeObject<Player>(File.ReadAllText($"{Saves.Name}\\{name}"), new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            });
         }
-        
     }
 }
