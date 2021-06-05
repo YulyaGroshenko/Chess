@@ -1,6 +1,7 @@
 ﻿        using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Chess.Logic
 {
@@ -20,19 +21,13 @@ namespace Chess.Logic
         public Sides Side { get; protected set; }
         public void MoveFigure(int digit, Letters letter)
         {
-            if (CheckRightMove(digit, letter))
-            {
-                Digit = digit;
-                Letter = letter;
-            }
-            else
-            {
-                throw new Exception("фигура не может так сходить");
-            }
+            Digit = digit;
+            Letter = letter;
+            
         }
-        protected abstract bool CheckRightMove(int digit, Letters letter);
+        public abstract bool CheckRightMove(int digit, Letters letter);
     }
-    public class Pawn : Figure         //пешка
+    public class Pawn : Figure         //пешка 
     {
         public override char Abbreviation => 'P'; 
         public Pawn(Sides side)
@@ -62,7 +57,7 @@ namespace Chess.Logic
         {
             Side = side;
         }
-        protected override bool CheckRightMove(int digit, Letters letter)
+        public override bool CheckRightMove(int digit, Letters letter)
         {
             if (Math.Abs(digit - Digit) == Math.Abs(letter - Letter))
                 return true;
@@ -76,7 +71,7 @@ namespace Chess.Logic
         {
             Side = side;
         }
-        protected override bool CheckRightMove(int digit, Letters letter)
+        public override bool CheckRightMove(int digit, Letters letter)
         {
             if (digit == Digit || letter == Letter)
                 return true;
@@ -84,13 +79,13 @@ namespace Chess.Logic
         }
     }
     class Knight : Figure      //конь 
-    {
+    { 
         public override char Abbreviation => 'H';
         public Knight(Sides side)
         {
             Side = side;
         }
-        protected override bool CheckRightMove(int digit, Letters letter)
+        public override bool CheckRightMove(int digit, Letters letter)
         {
             if ((Math.Abs(digit - Digit) == 2 && Math.Abs(letter - Letter) == 1) ||
                 (Math.Abs(letter - Letter) == 2 && Math.Abs(digit - Digit) == 1))
@@ -107,7 +102,7 @@ namespace Chess.Logic
         {
             Side = side;
         }
-        protected override bool CheckRightMove(int digit, Letters letter)
+        public override bool CheckRightMove(int digit, Letters letter)
         {
             if((Math.Abs(digit - Digit) == 0 || Math.Abs(digit - Digit) == 1) &&
                (Math.Abs(letter - Letter) == 0 || Math.Abs(letter - Letter) == 1))
@@ -124,7 +119,7 @@ namespace Chess.Logic
         {
             Side = side;
         }
-        protected override bool CheckRightMove(int digit, Letters letter)
+        public override bool CheckRightMove(int digit, Letters letter)
         {
             if((Math.Abs(digit - Digit) == Math.Abs(letter - Letter)) ||
                 (digit == Digit || letter == Letter))

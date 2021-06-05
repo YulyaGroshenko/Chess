@@ -8,7 +8,7 @@ namespace Chess.Logic
 
         public Board()
         {
-            Field = new Figure[8, 8]   // Оy - цифры   Ох - буквы  
+            Field = new Figure[8, 8]   
             {
                 { new Rook(Sides.Black), new Knight(Sides.Black), new Bishop(Sides.Black), new King(Sides.Black), new Queen(Sides.Black), new Bishop(Sides.Black), new Knight(Sides.Black), new Rook(Sides.Black) },
                 { new Pawn(Sides.Black), new Pawn(Sides.Black), new Pawn(Sides.Black), new Pawn(Sides.Black), new Pawn(Sides.Black), new Pawn(Sides.Black), new Pawn(Sides.Black), new Pawn(Sides.Black) },
